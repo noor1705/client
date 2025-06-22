@@ -1,0 +1,86 @@
+.uploadContainer {
+  padding: 2rem;
+  max-width: 600px;
+  margin: auto;
+  background: #f8fafc;
+  border-radius: 1rem;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+}
+
+.uploadContainer h2 {
+  text-align: center;
+  color: #1e3a8a;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.form input,
+.form textarea,
+.form select {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+.form textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.uploadBtn {
+  flex: 1;
+  background: #4f46e5;
+  color: #fff;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.uploadBtn:hover {
+  background: #4338ca;
+}
+
+.cancelBtn {
+  flex: 1;
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cancelBtn:hover {
+  background: #dc2626;
+}
+
+.message {
+  margin-top: 1.5rem;
+  color: #1e3a8a;
+  text-align: center;
+  font-weight: 500;
+}
