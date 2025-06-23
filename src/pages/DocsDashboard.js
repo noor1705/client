@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/DocsDashboard.module.css";
+import { NavLink } from "react-router-dom";
+import ProfileDropdown from "../components/ProfileDropdown";
+import logo from "../assets/logo.svg";
 
 // React Icons
-import { FaUpload, FaHome, FaSearch, FaComments, FaFileAlt, FaInfoCircle, FaWallet, FaKey, FaAngleDown, FaAngleUp } from "react-icons/fa";
+import { FaUpload, FaHome, FaSearch, FaFileAlt, FaInfoCircle, FaWallet, FaKey, FaAngleDown, FaAngleUp } from "react-icons/fa";
 
 const DocsDashboard = () => {
   const [user, setUser] = useState(null);
@@ -16,7 +19,7 @@ const DocsDashboard = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (!token) return navigate("/login");
+    if (!token) return navigate("/dashboard");
 
     const fetchUserAndDocs = async () => {
       try {
@@ -50,31 +53,44 @@ const DocsDashboard = () => {
     <div className={styles.dashboardWrapper}>
       {/* Header / Navbar */}
       <header className={styles.siteHeader}>
-        <div className={styles.headerContainer}>
-          <div className={styles.siteLogo}>
-            <img src="/logo.png" alt="Doc-Spot Logo" />
-            <span>Doc-Spot</span>
-          </div>
-          <nav>
-            <ul>
-              <li><a href="#"><FaHome /> Home</a></li>
-              <li><a href="#"><FaSearch /> Explore</a></li>
-              <li><a href="#"><FaComments /> Discussions</a></li>
-              <li><a href="#"><FaFileAlt /> My Docs</a></li>
-              <li><a href="#"><FaInfoCircle /> About Us</a></li>
-            </ul>
-          </nav>
-          <div className={styles.authButtons}>
-            <a href="#" className={styles.btnSignup}><FaWallet /> My Wallet</a>
-            <div
-              className={styles.profilePhoto}
-              onClick={() => document.querySelector(".sidebar")?.classList.toggle("active")}
-            >
-              {user ? user.name.charAt(0).toUpperCase() : "J"}
-            </div>
-          </div>
-        </div>
-      </header>
+  <div className={styles.headerContainer}>
+    <div className={styles.siteLogo}>
+      <img src={logo} alt="Doc-Spot Logo" />
+      <span>Doc-Spot</span>
+    </div>
+    <nav>
+      <ul>
+        <li>
+          <NavLink to="/landing" className={({ isActive }) => isActive ? styles.active : ""}>
+            <FaHome /> Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/explore" className={({ isActive }) => isActive ? styles.active : ""}>
+            <FaSearch /> Explore
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/dashboard" className={({ isActive }) => isActive ? styles.active : ""}>
+            <FaFileAlt /> My Docs
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/about" className={({ isActive }) => isActive ? styles.active : ""}>
+            <FaInfoCircle /> About Us
+          </NavLink>
+        </li>
+      </ul>
+    </nav>
+    <div className={styles.authButtons}>
+      <NavLink to="/wallet" className={styles.btnSignup}>
+        <FaWallet /> My Wallet
+      </NavLink>
+      <ProfileDropdown user={user} />
+    </div>
+  </div>
+</header>
+
 
       {/* Upload Button */}
       <button className={styles.uploadTopButton} onClick={handleUpload}>
@@ -127,7 +143,20 @@ const DocsDashboard = () => {
             </button>
           )}
         </section>
+
       </main>
+              <footer className={styles.siteFooter}>
+  <div className={styles.footerContent}>
+    <div className={styles.footerLinks}>
+      <NavLink to="/about">About Us</NavLink>
+      <a href="#">Terms of Use</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Contact</a>
+    </div>
+    <p>© 2025 Doc-Spot. All rights reserved.</p>
+  </div>
+</footer>
+
     </div>
   );
 };

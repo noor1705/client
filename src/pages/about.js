@@ -1,4 +1,5 @@
-import React from "react";
+
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
   FaHome,
@@ -9,89 +10,63 @@ import {
   FaWallet,
   FaUser,
 } from "react-icons/fa";
+import axios from "axios";
 
 import styles from "../styles/About.module.css";
+import ProfileDropdown from "../components/ProfileDropdown";
+import logo from "../assets/logo.svg";
+const API_BASE = "http://localhost:5000";
 
 const AboutUs = () => {
+  const token = localStorage.getItem("token");
+  const [user, setUser] = useState({ profilePic: "" });
+
+  useEffect(() => {
+    if (token) {
+      axios
+        .get(`${API_BASE}/api/user/profile`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          setUser({ profilePic: res.data.profilePic });
+        })
+        .catch(() => setUser({ profilePic: "" }));
+    }
+  }, []);
+  
   return (
     <div className={styles.aboutPage}>
       {/* Header + Navbar */}
       <header className={styles.siteHeader}>
-        <div className={styles.headerContainer}>
-          <div className={styles.siteLogo}>
-            <img src="/logo.png" alt="Doc-Spot Logo" />
-            <span>Doc-Spot</span>
-          </div>
-          <nav>
-            <ul>
-              <li>
-                <NavLink
-                  to="/landing"
-                  className={({ isActive }) =>
-                    isActive ? styles.activeNavLink : undefined
-                  }
-                >
-                  <FaHome /> Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/explore"
-                  className={({ isActive }) =>
-                    isActive ? styles.activeNavLink : undefined
-                  }
-                >
-                  <FaSearch /> Explore
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/discussion"
-                  className={({ isActive }) =>
-                    isActive ? styles.activeNavLink : undefined
-                  }
-                >
-                  <FaComments /> Discussions
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard"
-                  className={({ isActive }) =>
-                    isActive ? styles.activeNavLink : undefined
-                  }
-                >
-                  <FaBookOpen /> My Docs
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/about"
-                  className={({ isActive }) =>
-                    isActive ? styles.activeNavLink : undefined
-                  }
-                >
-                  <FaInfoCircle /> About Us
-                </NavLink>
-              </li>
-            </ul>
-          </nav>
+    <div className={styles.headerContainer}>
+      <div className={styles.siteLogo}>
+        <img src={logo} alt="Doc-Spot Logo" />
+        <span>Doc-Spot</span>
+      </div>
+      <nav>
+        <ul>
+<NavLink to="/landing" className={({ isActive }) => isActive ? styles.active : ""}>
+  <FaHome /> Home
+</NavLink>
+<NavLink to="/explore" className={({ isActive }) => isActive ? styles.active : ""}>
+  <FaSearch /> Explore
+</NavLink>
 
-          {/* Auth Buttons with My Wallet and Profile */}
-          <div className={styles.authButtons}>
-            <NavLink to="/wallet" className={styles.btnSignup}>
-              <FaWallet /> My Wallet
-            </NavLink>
-            <NavLink
-              to="/profile"
-              className={styles.btnSignup}
-              style={{ marginLeft: "10px" }}
-            >
-              <FaUser /> Profile
-            </NavLink>
-          </div>
-        </div>
-      </header>
+<NavLink to="/dashboard" className={({ isActive }) => isActive ? styles.active : ""}>
+  <FaBookOpen /> My Docs
+</NavLink>
+<NavLink to="/about" className={({ isActive }) => isActive ? styles.active : ""}>
+  <FaInfoCircle /> About Us
+</NavLink>
+
+        </ul>
+      </nav>
+      <div className={styles.authButtons}>
+        <NavLink to="/wallet" className={styles.btnSignup}><FaWallet /> My Wallet</NavLink>
+        <ProfileDropdown user={user} />
+      </div>
+    </div>
+  </header>
 
       {/* Main About Content */}
       <main className={styles.aboutMain}>

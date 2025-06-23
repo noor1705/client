@@ -8,6 +8,7 @@ import {
   FaWallet, FaArrowUp, FaDownload, FaSortAmountDown, FaSortAmountUp
 } from "react-icons/fa";
 import ProfileDropdown from "../components/ProfileDropdown";
+import logo from "../assets/logo.svg";
 
 const API_BASE = "http://localhost:5000";
 
@@ -32,7 +33,7 @@ const ExplorePage = () => {
       publisherId: "1",
       profilePic: "/assets/user1.png",
       upvotes: 12,
-      type: "free",
+      accessType: "free",
       createdAt: new Date(),
     },
     {
@@ -44,7 +45,7 @@ const ExplorePage = () => {
       publisherId: "2",
       profilePic: "/assets/user2.png",
       upvotes: 8,
-      type: "paid",
+      accessType: "paid",
       price: 50,
       createdAt: new Date(),
     },
@@ -200,16 +201,25 @@ const handleDownload = (doc) => {
   <header className={styles.siteHeader}>
     <div className={styles.headerContainer}>
       <div className={styles.siteLogo}>
-        <img src="/assets/logo.png" alt="Doc-Spot" />
+        <img src={logo} alt="Doc-Spot Logo" />
         <span>Doc-Spot</span>
       </div>
       <nav>
         <ul>
-          <li><NavLink to="/landing"><FaHome /> Home</NavLink></li>
-          <li><NavLink to="/explore"><FaSearch /> Explore</NavLink></li>
-          <li><NavLink to="/discussion"><FaComments /> Discussions</NavLink></li>
-          <li><NavLink to="/dashboard"><FaBookOpen /> My Docs</NavLink></li>
-          <li><NavLink to="/about"><FaInfoCircle /> About Us</NavLink></li>
+<NavLink to="/landing" className={({ isActive }) => isActive ? styles.active : ""}>
+  <FaHome /> Home
+</NavLink>
+<NavLink to="/explore" className={({ isActive }) => isActive ? styles.active : ""}>
+  <FaSearch /> Explore
+</NavLink>
+
+<NavLink to="/dashboard" className={({ isActive }) => isActive ? styles.active : ""}>
+  <FaBookOpen /> My Docs
+</NavLink>
+<NavLink to="/about" className={({ isActive }) => isActive ? styles.active : ""}>
+  <FaInfoCircle /> About Us
+</NavLink>
+
         </ul>
       </nav>
       <div className={styles.authButtons}>

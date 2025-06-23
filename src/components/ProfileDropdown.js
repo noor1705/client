@@ -39,9 +39,6 @@ const ProfileDropdown = ({ user }) => {
 
       {isOpen && (
         <div className={styles.dropdownMenu}>
-          <NavLink to="/profile" onClick={() => setIsOpen(false)}>
-            <FaUser /> Your Profile
-          </NavLink>
           <button onClick={handleLogout}>
             <FaSignOutAlt /> Logout
           </button>

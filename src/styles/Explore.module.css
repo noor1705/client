@@ -105,14 +105,14 @@
   justify-content: center;
   cursor: pointer;
 }
-.explorePage .activeNavLink {
+.explorePage .active{
   color: #4f46e5;
   font-weight: 600;
   border-bottom: 2px solid #4f46e5;
   transition: all 0.2s ease;
 }
 
-.explorePage .activeNavLink:hover {
+.explorePage .active:hover {
   color: #4338ca;
 }
 /* ============================

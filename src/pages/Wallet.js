@@ -3,7 +3,7 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import styles from "../styles/Wallet.module.css";
 import ProfileDropdown from "../components/ProfileDropdown";
-
+import logo from "../assets/logo.svg";
 import {
   FaHome, FaSearch, FaComments, FaBookOpen, FaInfoCircle,
   FaWallet, FaArrowDown, FaArrowUp, FaFileAlt, FaClock,
@@ -75,14 +75,14 @@ const Wallet = () => {
       <header className={styles.siteHeader}>
         <div className={styles.headerContainer}>
           <div className={styles.siteLogo}>
-            <img src="/assets/logo.png" alt="Doc-Spot Logo" />
+            <img src={logo} alt="Doc-Spot Logo" />
             <span>Doc-Spot</span>
           </div>
           <nav>
             <ul>
               <li><NavLink to="/landing" className={({ isActive }) => isActive ? styles.activeNavLink : undefined}><FaHome /> Home</NavLink></li>
               <li><NavLink to="/explore" className={({ isActive }) => isActive ? styles.activeNavLink : undefined}><FaSearch /> Explore</NavLink></li>
-              <li><NavLink to="/discussion" className={({ isActive }) => isActive ? styles.activeNavLink : undefined}><FaComments /> Discussions</NavLink></li>
+              {/* <li><NavLink to="/discussion" className={({ isActive }) => isActive ? styles.activeNavLink : undefined}><FaComments /> Discussions</NavLink></li> */}
               <li><NavLink to="/dashboard" className={({ isActive }) => isActive ? styles.activeNavLink : undefined}><FaBookOpen /> My Docs</NavLink></li>
               <li><NavLink to="/about" className={({ isActive }) => isActive ? styles.activeNavLink : undefined}><FaInfoCircle /> About Us</NavLink></li>
             </ul>
