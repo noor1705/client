@@ -2,72 +2,41 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/Home.module.css";
-
-// React Icons
 import { FaRocket, FaUsers, FaStar } from "react-icons/fa";
 
-// Images
+// Our Images and Logoes
 import heroImage from "../assets/hero.jpg";
 import missionImage from "../assets/mission.jpg";
 import bringImage from "../assets/bring.jpg";
 import offerImage from "../assets/offer.jpg";
-
+// This is the Local Host Address All Rest APIS LIKE POST and Get are run at in backend -backend server Running on this port
 const API_BASE = "http://localhost:5000";
-
 const Home = () => {
   const navigate = useNavigate();
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
   const [signupError, setSignupError] = useState("");
   const [loginError, setLoginError] = useState("");
-
-  const [signupData, setSignupData] = useState({
-    fullname: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    terms: false,
-  });
-
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-  });
-
+  const [signupData, setSignupData] = useState({fullname: "",email: "",password: "",confirmPassword: "",terms: false,});
+  const [loginData, setLoginData] = useState({email: "",password: "",})
   useEffect(() => {
     if (showLogin || showSignup) {
       document.body.classList.add(styles.modalOpen);
-    } else {
-      document.body.classList.remove(styles.modalOpen);
-    }
-  }, [showLogin, showSignup]);
+    } else {document.body.classList.remove(styles.modalOpen);
+           }}, 
+          [showLogin, showSignup]);
+  const resetSignupData = () => {setSignupError("");setSignupData({fullname: "",email: "",password: "",confirmPassword: "",terms: false,});};
 
-  const resetSignupData = () => {
-    setSignupError("");
-    setSignupData({
-      fullname: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      terms: false,
-    });
-  };
-
-  const handleSignup = async (e) => {
+  const handleSignup = async (e) =>
+    {
     e.preventDefault();
     setSignupError("");
-
-    if (signupData.password !== signupData.confirmPassword) {
-      setSignupError("Passwords do not match.");
+    if (signupData.password !== signupData.confirmPassword) {setSignupError("Passwords do not match.");
       return;
     }
-
-    try {
-      const res = await axios.post(`${API_BASE}/api/auth/signup`, {
-        name: signupData.fullname,
-        email: signupData.email,
-        password: signupData.password,
-      });
+    try 
+    {  const res = await axios.post(`${API_BASE}/api/auth/signup`, 
+       {name: signupData.fullname,email: signupData.email,password: signupData.password,});
 
       alert(res.data.message || "Signup successful. Please check your email.");
       setShowSignup(false);
@@ -87,9 +56,7 @@ const Home = () => {
     setLoginError("");
 
     try {
-      const res = await axios.post(`${API_BASE}/api/auth/login`, {
-        email: loginData.email,
-        password: loginData.password,
+      const res = await axios.post(`${API_BASE}/api/auth/login`, {email: loginData.email,password: loginData.password,
       });
 
       alert(res.data.msg || "Login successful!");
@@ -98,8 +65,7 @@ const Home = () => {
 
       setShowLogin(false);
       navigate("/landing");
-    } catch (err) {
-      const msg = err.response?.data?.msg || "Login failed.";
+    } catch (err) {const msg = err.response?.data?.msg || "Login failed.";
       setLoginError(msg);
     }
   };
@@ -162,10 +128,10 @@ const Home = () => {
                 <div className={styles.sectionText}>
                   <h3><FaStar /> What We Offer</h3>
                   <p>
-                    - Verified document uploads<br />
-                    - Wallet-based buy/sell system<br />
-                    - Powerful explore and filter functionality<br />
-                    - Secure user profiles with transaction history
+                    Verified document uploads<br />
+                    Wallet-based buy/sell system<br />
+                    Powerful explore and filter functionality<br />
+                    Secure user profiles with transaction history
                   </p>
                 </div>
                 <img src={offerImage} alt="What We Offer" className={styles.sectionImage} />
@@ -209,8 +175,7 @@ const Home = () => {
                 <p className={styles.formFooter}>
                   Don't have an account?{" "}
                   <button type="button" className={styles.linkBtn}
-                    onClick={() => {
-                      setShowLogin(false);
+                    onClick={() => {setShowLogin(false);
                       setShowSignup(true);
                     }}>
                     Sign up
@@ -285,8 +250,7 @@ const Home = () => {
                       setShowSignup(false);
                       setShowLogin(true);
                     }}
-                  >
-                    Sign in
+                  >Sign in
                   </button>
                 </p>
               </form>
