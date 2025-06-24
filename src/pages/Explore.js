@@ -4,10 +4,10 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import styles from "../styles/Explore.module.css";
 import {
-  FaHome, FaSearch, FaComments, FaBookOpen, FaInfoCircle,
-  FaWallet, FaArrowUp, FaDownload, FaSortAmountDown, FaSortAmountUp
+  FaHome, FaSearch, FaBookOpen, FaInfoCircle,
+  FaWallet, FaArrowUp, FaDownload, FaSortAmountDown, FaSortAmountUp,FaSignOutAlt
 } from "react-icons/fa";
-import ProfileDropdown from "../components/ProfileDropdown";
+
 import logo from "../assets/logo.svg";
 
 const API_BASE = "http://localhost:5000";
@@ -128,7 +128,10 @@ const ExplorePage = () => {
   const toggleSeeMore = (id) => {
     setSeeMore(prev => ({ ...prev, [id]: !prev[id] }));
   };
-
+const handleLogout = () => {
+  localStorage.removeItem("token");
+  navigate("/"); // redirect to home
+};
 const handleDownload = (doc) => {
   if (doc.accessType === "free") {
     axios.post(`${API_BASE}/api/document/download/${doc._id}`, {}, {
@@ -136,7 +139,7 @@ const handleDownload = (doc) => {
     }).then((res) => {
       const fileUrl = res.data.fileUrl;
       if (fileUrl) {
-        window.open(fileUrl, "_blank"); // ✅ Opens in new tab
+        window.open(fileUrl, "_blank");
       } else {
         alert("File URL missing.");
       }
@@ -161,7 +164,7 @@ const handleDownload = (doc) => {
       
       const fileUrl = res.data.fileUrl;
       if (fileUrl) {
-        window.open(fileUrl, "_blank");  // ✅ consistent with free download
+        window.open(fileUrl, "_blank");  
       } else {
         alert("File URL missing.");
       }
@@ -222,10 +225,12 @@ const handleDownload = (doc) => {
 
         </ul>
       </nav>
-      <div className={styles.authButtons}>
-        <NavLink to="/wallet" className={styles.btnSignup}><FaWallet /> My Wallet</NavLink>
-        <ProfileDropdown user={user} />
-      </div>
+<div className={styles.authButtons}>
+  <NavLink to="/wallet" className={styles.btnSignup}><FaWallet /> My Wallet</NavLink>
+  <button onClick={handleLogout} className={styles.logoutButton}>
+    <FaSignOutAlt /> Logout
+  </button>
+</div>
     </div>
   </header>
 
@@ -263,26 +268,17 @@ const handleDownload = (doc) => {
       docsToShow.map((doc) => (
         <div key={doc._id} className={styles.resultCard}>
           <div className={styles.cardTop}>
-            <div className={styles.profileSection}>
-              <NavLink to={`/profile/${doc.publisherId}`}>
-                {doc.profilePic ? (
-                  <img src={doc.profilePic} alt="Publisher" className={styles.profilePic} />
-                ) : (
-                  <div className={styles.initialPic}>
-                    {doc.publisher.charAt(0).toUpperCase()}
-                  </div>
-                )}
-              </NavLink>
-              <div>
-                <h3 className={styles.cardTitle}>{doc.title}</h3>
-              </div>
-            </div>
-            <div className={styles.actionIcons}>
-              <button onClick={() => handleUpvote(doc._id)} title="Upvote">
-                <FaArrowUp /> {doc.upvotes}
-              </button>
-            </div>
-          </div>
+  <div>
+    <h3 className={styles.cardTitle}>{doc.title}</h3>
+    <p className={styles.uploadedBy}>Uploaded by {doc.publisher}</p>
+  </div>
+  <div className={styles.actionIcons}>
+    <button onClick={() => handleUpvote(doc._id)} title="Upvote">
+      <FaArrowUp /> {doc.upvotes}
+    </button>
+  </div>
+</div>
+
           <p className={styles.cardDescription}>
             {seeMore[doc._id] || doc.description.length <= 150
               ? doc.description
