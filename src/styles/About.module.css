@@ -231,7 +231,23 @@
 .aboutPage .footerContent p {
   margin: 0.5rem 0;
 }
+.aboutPage .logoutButton {
+  background-color: #4338ca;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 10px;
+}
 
+.aboutPage .logoutButton:hover {
+  background-color: #3730a3;
+}
 /* ============================
    Responsive Adjustments
 =============================== */

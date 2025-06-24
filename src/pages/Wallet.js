@@ -2,42 +2,24 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 import styles from "../styles/Wallet.module.css";
-import ProfileDropdown from "../components/ProfileDropdown";
+
 import logo from "../assets/logo.svg";
 import {
-  FaHome, FaSearch, FaComments, FaBookOpen, FaInfoCircle,
+  FaHome, FaSearch,  FaBookOpen, FaInfoCircle,
   FaWallet, FaArrowDown, FaArrowUp, FaFileAlt, FaClock,
-  FaMoneyBillWave, FaPlusCircle, FaMinusCircle, FaReceipt
+  FaMoneyBillWave, FaPlusCircle, FaSignOutAlt,FaMinusCircle, FaReceipt
 } from "react-icons/fa";
 
 const API_BASE = "http://localhost:5000";
 
 const Wallet = () => {
   const token = localStorage.getItem("token");
-  const [user, setUser] = useState(null);
   const [balance, setBalance] = useState(0);
   const [amountToAdd, setAmountToAdd] = useState("");
   const [withdrawAmount, setWithdrawAmount] = useState("");
   const [transactions, setTransactions] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get(`${API_BASE}/api/user/profile`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => setUser(res.data))
-      .catch(() => setUser({ name: "User123", profilePic: "" }));
 
-    axios
-      .get(`${API_BASE}/api/wallet`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        setBalance(res.data.balance);
-        setTransactions(res.data.transactions || []);
-      })
-      .catch((err) => console.error("Wallet fetch error", err));
-  }, [token]);
 
   const handleAddFunds = () => {
     axios
@@ -68,7 +50,10 @@ const Wallet = () => {
       })
       .catch(() => alert("Failed to withdraw funds"));
   };
-
+const handleLogout = () => {
+  localStorage.removeItem("token");
+  navigate("/"); // redirect to home
+};
   return (
     <div className={styles.walletPage}>
       {/* Header */}
@@ -86,12 +71,11 @@ const Wallet = () => {
               <li><NavLink to="/dashboard" className={({ isActive }) => isActive ? styles.activeNavLink : undefined}><FaBookOpen /> My Docs</NavLink></li>
               <li><NavLink to="/about" className={({ isActive }) => isActive ? styles.activeNavLink : undefined}><FaInfoCircle /> About Us</NavLink></li>
             </ul>
-          </nav>
-          <div className={styles.authButtons}>
+          </nav><div className={styles.authButtons}>
             <NavLink to="/wallet" className={styles.btnSignup}><FaWallet /> My Wallet</NavLink>
-            <div className={styles.profilePhoto} title="Profile">
-              <ProfileDropdown user={user} />
-            </div>
+            <button onClick={handleLogout} className={styles.logoutButton}>
+              <FaSignOutAlt /> Logout
+            </button>
           </div>
         </div>
       </header>

@@ -226,6 +226,7 @@
   gap: 0.6rem;
 }
 
+
 .explorePage .actionIcons button {
   background-color: #e0f2fe;
   color: #0284c7;
@@ -418,7 +419,28 @@
 .modalBox button:last-of-type:hover {
   background-color: #c0c0c0;
 }
+.explorePage .uploadedBy {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 4px;
+}
+.explorePage .logoutButton {
+  background-color: #4338ca;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 10px;
+}
 
+.explorePage .logoutButton:hover {
+  background-color: #3730a3;
+}
 @keyframes scaleFade {
   from {
     opacity: 0;

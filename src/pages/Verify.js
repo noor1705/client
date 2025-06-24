@@ -10,21 +10,14 @@ const Verify = () => {
   const [params] = useSearchParams();
   const navigate = useNavigate();
 
-  const email = params.get("email");  // passed via URL too
+  const email = params.get("email"); 
 
   useEffect(() => {
     const token = params.get("token");
     if (!token) return setStatus("Invalid verification link.");
 
     axios.get(`${API_BASE}/api/auth/verify?token=${token}`)
-      .then(res => {
-        setStatus(res.data.message || "Email verified!");
-        setShowResend(false);
-
-        // Redirect after 2 seconds to landing-page
-        setTimeout(() => {
-          navigate("/Landing");
-        }, 2000);
+  .then(res => {setStatus(res.data.message || "Email verified!");setShowResend(false);setTimeout(() => {navigate("/Landing");}, 1000);
       })
       .catch(err => {
         setStatus(err.response?.data || "Verification failed or token expired.");

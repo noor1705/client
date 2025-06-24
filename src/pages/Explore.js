@@ -4,10 +4,9 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import styles from "../styles/Explore.module.css";
 import {
-  FaHome, FaSearch, FaComments, FaBookOpen, FaInfoCircle,
-  FaWallet, FaArrowUp, FaDownload, FaSortAmountDown, FaSortAmountUp
+  FaHome, FaSearch, FaBookOpen, FaInfoCircle,
+  FaWallet, FaArrowUp, FaDownload, FaSortAmountDown, FaSortAmountUp,FaSignOutAlt
 } from "react-icons/fa";
-import ProfileDropdown from "../components/ProfileDropdown";
 import logo from "../assets/logo.svg";
 
 const API_BASE = "http://localhost:5000";
@@ -22,7 +21,6 @@ const ExplorePage = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [sortOrder, setSortOrder] = useState({ upvotes: "desc", date: "desc" });
   const [modalDoc, setModalDoc] = useState(null);
-
   const dummyDocs = [
     {
       _id: "1",
@@ -31,7 +29,6 @@ const ExplorePage = () => {
       tags: ["networks", "final", "university"],
       publisher: "Ali Raza",
       publisherId: "1",
-      profilePic: "/assets/user1.png",
       upvotes: 12,
       accessType: "free",
       createdAt: new Date(),
@@ -43,7 +40,7 @@ const ExplorePage = () => {
       tags: ["compiler", "cheatsheet", "semester 6"],
       publisher: "Sana Malik",
       publisherId: "2",
-      profilePic: "/assets/user2.png",
+      
       upvotes: 8,
       accessType: "paid",
       price: 50,
@@ -56,9 +53,9 @@ const ExplorePage = () => {
       axios.get(`${API_BASE}/api/user/profile`, {
         headers: { Authorization: `Bearer ${token}` },
       }).then((res) => setUser(res.data))
-        .catch(() => setUser({ name: "User123", profilePic: "" }));
+        .catch(() => setUser({ name: "User123"}));
     } else {
-      setUser({ name: "User123", profilePic: "" });
+      setUser({ name: "User123" });
     }
 
     axios.get(`${API_BASE}/api/document/all`, {
@@ -99,8 +96,7 @@ const ExplorePage = () => {
     });
   };
 
-  const filterByUniversity = () => {
-    if (!user?.university) return;
+  const filterByUniversity = () => {if (!user?.university) return;
     const filtered = (searchResults.length ? searchResults : docs).filter(
       doc => doc.university === user.university
     );
@@ -125,10 +121,12 @@ const ExplorePage = () => {
     setSortOrder(prev => ({ ...prev, upvotes: order }));
   };
 
-  const toggleSeeMore = (id) => {
-    setSeeMore(prev => ({ ...prev, [id]: !prev[id] }));
+  const toggleSeeMore = (id) => {setSeeMore(prev => ({ ...prev, [id]: !prev[id] }));
   };
-
+const handleLogout = () => {
+  localStorage.removeItem("token");
+  navigate("/"); // redirect to home
+};
 const handleDownload = (doc) => {
   if (doc.accessType === "free") {
     axios.post(`${API_BASE}/api/document/download/${doc._id}`, {}, {
@@ -136,13 +134,13 @@ const handleDownload = (doc) => {
     }).then((res) => {
       const fileUrl = res.data.fileUrl;
       if (fileUrl) {
-        window.open(fileUrl, "_blank"); // ✅ Opens in new tab
+        window.open(fileUrl, "_blank");
       } else {
         alert("File URL missing.");
       }
     }).catch(() => alert("Download failed"));
   } else {
-    setModalDoc(doc); // paid doc flow
+    setModalDoc(doc); 
   }
 };
 
@@ -161,7 +159,7 @@ const handleDownload = (doc) => {
       
       const fileUrl = res.data.fileUrl;
       if (fileUrl) {
-        window.open(fileUrl, "_blank");  // ✅ consistent with free download
+        window.open(fileUrl, "_blank");  
       } else {
         alert("File URL missing.");
       }
@@ -185,7 +183,6 @@ const handleDownload = (doc) => {
 
   return (
     <div className={styles.explorePage}>
-  {/* Modal for Paid Download */}
   {modalDoc && (
     <div className={styles.modalBackdrop}>
       <div className={styles.modalBox}>
@@ -197,7 +194,6 @@ const handleDownload = (doc) => {
     </div>
   )}
 
-  {/* Header */}
   <header className={styles.siteHeader}>
     <div className={styles.headerContainer}>
       <div className={styles.siteLogo}>
@@ -222,14 +218,15 @@ const handleDownload = (doc) => {
 
         </ul>
       </nav>
-      <div className={styles.authButtons}>
-        <NavLink to="/wallet" className={styles.btnSignup}><FaWallet /> My Wallet</NavLink>
-        <ProfileDropdown user={user} />
-      </div>
+<div className={styles.authButtons}>
+  <NavLink to="/wallet" className={styles.btnSignup}><FaWallet /> My Wallet</NavLink>
+  <button onClick={handleLogout} className={styles.logoutButton}>
+    <FaSignOutAlt /> Logout
+  </button>
+</div>
     </div>
   </header>
 
-  {/* Search */}
   <div className={styles.searchContainer}>
     <input
       type="text"
@@ -263,26 +260,17 @@ const handleDownload = (doc) => {
       docsToShow.map((doc) => (
         <div key={doc._id} className={styles.resultCard}>
           <div className={styles.cardTop}>
-            <div className={styles.profileSection}>
-              <NavLink to={`/profile/${doc.publisherId}`}>
-                {doc.profilePic ? (
-                  <img src={doc.profilePic} alt="Publisher" className={styles.profilePic} />
-                ) : (
-                  <div className={styles.initialPic}>
-                    {doc.publisher.charAt(0).toUpperCase()}
-                  </div>
-                )}
-              </NavLink>
-              <div>
-                <h3 className={styles.cardTitle}>{doc.title}</h3>
-              </div>
-            </div>
-            <div className={styles.actionIcons}>
-              <button onClick={() => handleUpvote(doc._id)} title="Upvote">
-                <FaArrowUp /> {doc.upvotes}
-              </button>
-            </div>
-          </div>
+  <div>
+    <h3 className={styles.cardTitle}>{doc.title}</h3>
+    <p className={styles.uploadedBy}>Uploaded by {doc.publisher}</p>
+  </div>
+  <div className={styles.actionIcons}>
+    <button onClick={() => handleUpvote(doc._id)} title="Upvote">
+      <FaArrowUp /> {doc.upvotes}
+    </button>
+  </div>
+</div>
+
           <p className={styles.cardDescription}>
             {seeMore[doc._id] || doc.description.length <= 150
               ? doc.description
@@ -312,8 +300,6 @@ const handleDownload = (doc) => {
       ))
     )}
   </div>
-
-  {/* Footer */}
   <footer className={styles.siteFooter}>
     <div className={styles.footerContent}>
       <div className={styles.footerLinks}>
