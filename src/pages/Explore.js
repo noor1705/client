@@ -7,7 +7,6 @@ import {
   FaHome, FaSearch, FaBookOpen, FaInfoCircle,
   FaWallet, FaArrowUp, FaDownload, FaSortAmountDown, FaSortAmountUp,FaSignOutAlt
 } from "react-icons/fa";
-
 import logo from "../assets/logo.svg";
 
 const API_BASE = "http://localhost:5000";
@@ -22,7 +21,6 @@ const ExplorePage = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [sortOrder, setSortOrder] = useState({ upvotes: "desc", date: "desc" });
   const [modalDoc, setModalDoc] = useState(null);
-
   const dummyDocs = [
     {
       _id: "1",
@@ -31,7 +29,6 @@ const ExplorePage = () => {
       tags: ["networks", "final", "university"],
       publisher: "Ali Raza",
       publisherId: "1",
-      profilePic: "/assets/user1.png",
       upvotes: 12,
       accessType: "free",
       createdAt: new Date(),
@@ -43,7 +40,7 @@ const ExplorePage = () => {
       tags: ["compiler", "cheatsheet", "semester 6"],
       publisher: "Sana Malik",
       publisherId: "2",
-      profilePic: "/assets/user2.png",
+      
       upvotes: 8,
       accessType: "paid",
       price: 50,
@@ -56,9 +53,9 @@ const ExplorePage = () => {
       axios.get(`${API_BASE}/api/user/profile`, {
         headers: { Authorization: `Bearer ${token}` },
       }).then((res) => setUser(res.data))
-        .catch(() => setUser({ name: "User123", profilePic: "" }));
+        .catch(() => setUser({ name: "User123"}));
     } else {
-      setUser({ name: "User123", profilePic: "" });
+      setUser({ name: "User123" });
     }
 
     axios.get(`${API_BASE}/api/document/all`, {
@@ -99,8 +96,7 @@ const ExplorePage = () => {
     });
   };
 
-  const filterByUniversity = () => {
-    if (!user?.university) return;
+  const filterByUniversity = () => {if (!user?.university) return;
     const filtered = (searchResults.length ? searchResults : docs).filter(
       doc => doc.university === user.university
     );
@@ -125,8 +121,7 @@ const ExplorePage = () => {
     setSortOrder(prev => ({ ...prev, upvotes: order }));
   };
 
-  const toggleSeeMore = (id) => {
-    setSeeMore(prev => ({ ...prev, [id]: !prev[id] }));
+  const toggleSeeMore = (id) => {setSeeMore(prev => ({ ...prev, [id]: !prev[id] }));
   };
 const handleLogout = () => {
   localStorage.removeItem("token");
@@ -145,7 +140,7 @@ const handleDownload = (doc) => {
       }
     }).catch(() => alert("Download failed"));
   } else {
-    setModalDoc(doc); // paid doc flow
+    setModalDoc(doc); 
   }
 };
 
@@ -188,7 +183,6 @@ const handleDownload = (doc) => {
 
   return (
     <div className={styles.explorePage}>
-  {/* Modal for Paid Download */}
   {modalDoc && (
     <div className={styles.modalBackdrop}>
       <div className={styles.modalBox}>
@@ -200,7 +194,6 @@ const handleDownload = (doc) => {
     </div>
   )}
 
-  {/* Header */}
   <header className={styles.siteHeader}>
     <div className={styles.headerContainer}>
       <div className={styles.siteLogo}>
@@ -234,7 +227,6 @@ const handleDownload = (doc) => {
     </div>
   </header>
 
-  {/* Search */}
   <div className={styles.searchContainer}>
     <input
       type="text"
@@ -308,8 +300,6 @@ const handleDownload = (doc) => {
       ))
     )}
   </div>
-
-  {/* Footer */}
   <footer className={styles.siteFooter}>
     <div className={styles.footerContent}>
       <div className={styles.footerLinks}>
