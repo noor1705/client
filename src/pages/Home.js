@@ -9,6 +9,7 @@ import heroImage from "../assets/hero.jpg";
 import missionImage from "../assets/mission.jpg";
 import bringImage from "../assets/bring.jpg";
 import offerImage from "../assets/offer.jpg";
+import logo from "../assets/logo.svg";
 // This is the Local Host Address All Rest APIS LIKE POST and Get are run at in backend -backend server Running on this port
 const API_BASE = "http://localhost:5000";
 const Home = () => {
@@ -77,7 +78,10 @@ const Home = () => {
           <div className={showLogin || showSignup ? styles.blurred : ""}>
             <header className={styles.navbar}>
               <div className={styles.container}>
-                <h1 className={styles.logo}>Doc-Spot</h1>
+                <div className={styles.siteLogo}>
+            <img src={logo} alt="Doc-Spot Logo" />
+            <span>Doc-Spot</span>
+          </div>
                 <div className={styles.navLinks}>
                   <button className={styles.navBtn} onClick={() => setShowLogin(true)}>
                     Login
