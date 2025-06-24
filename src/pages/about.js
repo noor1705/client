@@ -1,39 +1,30 @@
 
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";      
 import {
   FaHome,
-  FaSearch,
-  FaComments,
-  FaBookOpen,
+  FaSearch,  FaBookOpen,
   FaInfoCircle,
   FaWallet,
-  FaUser,
+FaSignOutAlt
 } from "react-icons/fa";
 import axios from "axios";
 
 import styles from "../styles/About.module.css";
-import ProfileDropdown from "../components/ProfileDropdown";
+
 import logo from "../assets/logo.svg";
 const API_BASE = "http://localhost:5000";
 
 const AboutUs = () => {
   const token = localStorage.getItem("token");
-  const [user, setUser] = useState({ profilePic: "" });
 
-  useEffect(() => {
-    if (token) {
-      axios
-        .get(`${API_BASE}/api/user/profile`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((res) => {
-          setUser({ profilePic: res.data.profilePic });
-        })
-        .catch(() => setUser({ profilePic: "" }));
-    }
-  }, []);
-  
+const navigate = useNavigate();
+
+  const handleLogout = () => {
+  localStorage.removeItem("token");
+  navigate("/"); // redirect to home
+};
   return (
     <div className={styles.aboutPage}>
       {/* Header + Navbar */}
@@ -61,10 +52,12 @@ const AboutUs = () => {
 
         </ul>
       </nav>
-      <div className={styles.authButtons}>
-        <NavLink to="/wallet" className={styles.btnSignup}><FaWallet /> My Wallet</NavLink>
-        <ProfileDropdown user={user} />
-      </div>
+<div className={styles.authButtons}>
+  <NavLink to="/wallet" className={styles.btnSignup}><FaWallet /> My Wallet</NavLink>
+  <button onClick={handleLogout} className={styles.logoutButton}>
+    <FaSignOutAlt /> Logout
+  </button>
+</div>
     </div>
   </header>
 
