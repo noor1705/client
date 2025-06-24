@@ -5,12 +5,11 @@ import styles from "../styles/Landing.module.css";
 import logo from "../assets/logo.svg";
 import {
   FaUpload,
-  FaComments,
   FaSearch,
   FaHome,
   FaBookOpen,
   FaInfoCircle,
-  FaWallet
+  FaWallet,FaSignOutAlt,
 } from "react-icons/fa";
 
 const API_BASE = "http://localhost:5000";
@@ -59,7 +58,10 @@ const LandingPage = () => {
       });
     }
   }, [token]);
-
+const handleLogout = () => {
+  localStorage.removeItem("token");
+  navigate("/"); // redirect to home
+};
   return (
     <div className={styles.landingPage}>
       {/* Header */}
@@ -74,36 +76,26 @@ const LandingPage = () => {
             <ul>
               <li><NavLink to="/landing" className={({ isActive }) => isActive ? styles.activeNavLink : undefined}><FaHome /> Home</NavLink></li>
               <li><NavLink to="/explore" className={({ isActive }) => isActive ? styles.activeNavLink : undefined}><FaSearch /> Explore</NavLink></li>
-              {/* <li><NavLink to="/discussion" className={({ isActive }) => isActive ? styles.activeNavLink : undefined}><FaComments /> Discussions</NavLink></li> */}
               <li><NavLink to="/dashboard" className={({ isActive }) => isActive ? styles.activeNavLink : undefined}><FaBookOpen /> My Docs</NavLink></li>
               <li><NavLink to="/about" className={({ isActive }) => isActive ? styles.activeNavLink : undefined}><FaInfoCircle /> About Us</NavLink></li>
             </ul>
           </nav>
-          <div className={styles.authButtons}>
-  <NavLink to="/wallet" className={styles.btnSignup}>
-    <FaWallet /> My Wallet
-  </NavLink>
-  <div className={styles.profileMenu}>
-    <div className={styles.profilePhoto} title={user?.name || "Profile"}>
-      {user ? user.name.charAt(0).toUpperCase() : "J"}
-    </div>
-    
-  </div>
-</div>
+        <div className={styles.authButtons}>
+          <NavLink to="/wallet" className={styles.btnSignup}><FaWallet /> My Wallet</NavLink>
+          <button onClick={handleLogout} className={styles.logoutButton}>
+            <FaSignOutAlt /> Logout
+          </button>
+        </div>
         </div>
       </header>
 
-      {/* Quick Actions */}
       <section className={styles.quickActions}>
         <h2>Quick Actions</h2>
         <div className={styles.actionsGrid}>
           <button className={styles.btnAction} onClick={() => navigate("/upload")}><FaUpload /> Upload New Document</button>
-          {/* <button className={styles.btnAction} onClick={() => navigate("/discussion")}><FaComments /> Start a Discussion</button> */}
           <button className={styles.btnAction} onClick={() => navigate("/explore")}><FaSearch /> Explore Topics</button>
         </div>
       </section>
-
-      {/* Activity Feed */}
       <section className={styles.activityFeed}>
         <h2>Recent Activity</h2>
         <ul className={styles.feedList}>
@@ -118,7 +110,7 @@ const LandingPage = () => {
 
       {/* Contributions Section */}
       <section className={styles.contributions}>
-        <h2>My Contributions</h2>
+        <h2>My Stats</h2>
         <div className={styles.contributionsGrid}>
           {(user?.contributions || dummyContributions).map((contrib, index) => (
             <div key={index} className={styles.contributionCard}>
