@@ -3,24 +3,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/UploadDocument.module.css";
 import { FaUpload, FaTimes, FaFileAlt } from "react-icons/fa";
-
 const API_BASE = "http://localhost:5000";
-
 const UploadDocument = () => {
   const navigate = useNavigate();
-
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    semester: "Fall",
-    academicYear: new Date().getFullYear(),
-    courseName: "",
-    instructorName: "",
-    accessType: "free",
-    price: "",
-    tags: "",
-    file: null,
-  });
+  const [formData, setFormData] = useState({title: "",description: "",
+    semester: "Fall",academicYear: new Date().getFullYear(),courseName: "",instructorName: "",accessType: "free",price: "",tags: "",file: null,});
 
   const [message, setMessage] = useState("");
 
@@ -31,25 +18,19 @@ const UploadDocument = () => {
       [name]: files ? files[0] : value,
     }));
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.title || !formData.courseName || !formData.file) {
-      return setMessage("⚠️ Title, Course Name, and File are required.");
+      return setMessage("Title, Course Name, and File are required.");
     }
 
     if (formData.accessType === "paid" && (!formData.price || formData.price < 0)) {
-      return setMessage("⚠️ Please provide a valid price for paid documents.");
+      return setMessage(" Please provide a valid price for paid documents.");
     }
-
     const payload = new FormData();
     for (let key in formData) {
-      if (key === "tags") {
-        const cleaned = formData.tags
-          .split(",")
-          .map((tag) => tag.trim())
-          .filter((tag) => tag.length > 0);
+      if (key === "tags") {const cleaned = formData.tags.split(",").map((tag) => tag.trim()).filter((tag) => tag.length > 0);
         payload.append("tags", JSON.stringify(cleaned));
       } else {
         payload.append(key, formData[key]);
@@ -69,7 +50,7 @@ const UploadDocument = () => {
       setTimeout(() => navigate("/dashboard"), 100);
     } catch (err) {
       console.error(err);
-      setMessage("❌ Upload failed.");
+      setMessage("Upload failed.");
     }
   };
 
