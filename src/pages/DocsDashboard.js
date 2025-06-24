@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/DocsDashboard.module.css";
 import { NavLink } from "react-router-dom";
-import ProfileDropdown from "../components/ProfileDropdown";
+import { FaSignOutAlt } from "react-icons/fa";
 import logo from "../assets/logo.svg";
 
 // React Icons
@@ -47,7 +47,12 @@ const DocsDashboard = () => {
 
   const handleUpload = () => {
     navigate("/upload");
+    
   };
+  const handleLogout = () => {
+  localStorage.removeItem("token");
+  navigate("/"); // redirect to home
+};
 
   return (
     <div className={styles.dashboardWrapper}>
@@ -83,11 +88,12 @@ const DocsDashboard = () => {
       </ul>
     </nav>
     <div className={styles.authButtons}>
-      <NavLink to="/wallet" className={styles.btnSignup}>
-        <FaWallet /> My Wallet
-      </NavLink>
-      <ProfileDropdown user={user} />
-    </div>
+  <NavLink to="/wallet" className={styles.btnSignup}><FaWallet /> My Wallet</NavLink>
+  <button onClick={handleLogout} className={styles.logoutButton}>
+    <FaSignOutAlt /> Logout
+  </button>
+</div>
+
   </div>
 </header>
 
@@ -102,7 +108,7 @@ const DocsDashboard = () => {
 
         {/* Uploaded Documents */}
         <section>
-          <h3>📤 Uploaded Documents</h3>
+          <h3>Uploaded Documents</h3>
           <ul>
             {(showAllUploaded ? uploadedDocs : uploadedDocs.slice(0, 3)).map((doc) => (
               <li key={doc._id}>
@@ -126,7 +132,7 @@ const DocsDashboard = () => {
 
         {/* Downloaded Documents */}
         <section>
-          <h3>📥 Downloaded Documents</h3>
+          <h3>Downloaded Documents</h3>
           <ul>
             {(showAllDownloaded ? downloadedDocs : downloadedDocs.slice(0, 3)).map((doc) => (
               <li key={doc._id}>
