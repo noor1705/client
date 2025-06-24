@@ -19,9 +19,19 @@
 }
 
 .logo {
-  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 40px;
+  height: 40px;
+}
+
+.logo span {
+  font-size: 1.5rem;
   font-weight: bold;
-  color: #1d4ed8; /* Blue */
 }
 
 .navLinks {
