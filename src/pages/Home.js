@@ -78,7 +78,7 @@ const Home = () => {
           <div className={showLogin || showSignup ? styles.blurred : ""}>
             <header className={styles.navbar}>
               <div className={styles.container}>
-                <div className={styles.siteLogo}>
+                <div className={styles.logo}>
             <img src={logo} alt="Doc-Spot Logo" />
             <span>Doc-Spot</span>
           </div>
