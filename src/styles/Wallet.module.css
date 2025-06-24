@@ -1,0 +1,320 @@
+/* ============================
+   Base Wrapper
+============================= */
+.walletPage {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f8ff;
+  color: #1a1a1a;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================
+   Header
+============================= */
+.walletPage .siteHeader {
+  background-color: #003366;
+  color: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.walletPage .headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.walletPage .siteLogo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.walletPage .siteLogo img {
+  width: 40px;
+  height: 40px;
+}
+
+.walletPage .siteLogo span {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.walletPage nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.walletPage nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.walletPage nav a:hover {
+  color: #ffdd57;
+}
+
+.walletPage .authButtons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.walletPage .btnSignup {
+  background-color: #ffdd57;
+  color: #003366;
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.walletPage .btnSignup:hover {
+  background-color: #ffe680;
+}
+
+.walletPage .profilePhoto {
+  background-color: #ffffff;
+  color: #003366;
+  font-weight: bold;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.walletPage .profileImgCircle {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.walletPage .activeNavLink {
+  color: #4f46e5;
+  font-weight: 600;
+  border-bottom: 2px solid #4f46e5;
+  transition: all 0.2s ease;
+}
+
+/* ============================
+   Wallet Content
+============================= */
+.walletPage .walletContent {
+  padding: 120px 2rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  flex: 1;
+}
+
+.walletPage h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #003366;
+}
+
+.walletPage p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.walletPage .fundForm {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.walletPage .fundForm input {
+  padding: 0.6rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  width: 200px;
+  font-size: 1rem;
+}
+
+.walletPage .fundForm button {
+  background-color: #ffdd57;
+  color: #003366;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.walletPage .fundForm button:hover {
+  background-color: #ffe680;
+}
+
+/* ============================
+   Transaction History
+============================= */
+.walletPage .transactionHistory {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.withdrawForm {
+  margin: 1rem 0;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.withdrawForm input {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 200px;
+  font-size: 1rem;
+}
+
+.withdrawForm button {
+  padding: 0.5rem 1rem;
+  background-color: #ff5a5f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.withdrawForm button:hover {
+  background-color: #e64950;
+}
+
+.walletPage .transactionHistory h3 {
+  margin-bottom: 1rem;
+  color: #003366;
+  font-size: 1.3rem;
+}
+
+.walletPage .transactionHistory ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.walletPage .transactionHistory li {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.walletPage .credit {
+  color: #0f766e;
+  background-color: #e6fffa;
+  border-radius: 6px;
+}
+
+.walletPage .debit {
+  color: #b91c1c;
+  background-color: #fee2e2;
+  border-radius: 6px;
+}
+
+.walletPage .date {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+/* ============================
+   Footer
+============================= */
+.walletPage .siteFooter {
+  background-color: #003366;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: auto;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.walletPage .footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.walletPage .footerLinks {
+  margin-bottom: 0.5rem;
+}
+
+.walletPage .footerLinks a {
+  color: white;
+  margin: 0 1rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.walletPage .footerLinks a:hover {
+  color: #ffdd57;
+}
+
+/* ============================
+   Responsive
+============================= */
+@media (max-width: 768px) {
+  .walletPage .headerContainer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .walletPage nav ul {
+    display: none;
+  }
+
+  .walletPage .fundForm {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .walletPage .transactionHistory li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+}
+.walletPage .logoutButton {
+  background-color: #4338ca;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 10px;
+}
+
+.walletPage .logoutButton:hover {
+  background-color: #3730a3;
+}

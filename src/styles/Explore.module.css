@@ -1,0 +1,453 @@
+/* ============================
+   Base Wrapper
+============================= */
+.explorePage {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f8ff;
+  color: #1a1a1a;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================
+   Header
+============================= */
+.explorePage .siteHeader {
+  background-color: #003366;
+  color: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.explorePage .headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.explorePage .siteLogo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.explorePage .siteLogo img {
+  width: 40px;
+  height: 40px;
+}
+
+.explorePage .siteLogo span {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.explorePage nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.explorePage nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.explorePage nav a:hover {
+  color: #ffdd57;
+}
+
+.explorePage .authButtons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.explorePage .btnSignup {
+  background-color: #ffdd57;
+  color: #003366;
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+.explorePage .btnSignup:hover {
+  background-color: #ffe680;
+}
+
+.explorePage .profilePhoto {
+  background-color: #ffffff;
+  color: #003366;
+  font-weight: bold;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.explorePage .active{
+  color: #4f46e5;
+  font-weight: 600;
+  border-bottom: 2px solid #4f46e5;
+  transition: all 0.2s ease;
+}
+
+.explorePage .active:hover {
+  color: #4338ca;
+}
+/* ============================
+   Search Bar
+============================= */
+.explorePage .searchContainer {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+
+.explorePage .searchContainer input {
+  padding: 0.6rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  width: 300px;
+  font-size: 1rem;
+}
+
+.explorePage .searchContainer button {
+  background-color: #ffdd57;
+  color: #003366;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.explorePage .searchContainer button:hover {
+  background-color: #ffe680;
+}
+
+/* ============================
+   Filter Buttons
+============================= */
+.explorePage .filterButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+
+.explorePage .filterButtons button {
+  background-color: #0056b3;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.explorePage .filterButtons button:hover {
+  background-color: #004a99;
+}
+
+/* ============================
+   Result Cards Grid
+============================= */
+.explorePage .resultGrid {
+  max-width: 1000px;
+  margin: 1rem auto 2rem;
+  padding: 0 1rem;
+  flex: 1;
+}
+
+.explorePage .resultCard {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  margin-bottom: 1.5rem;
+}
+
+.explorePage .cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.explorePage .profileSection {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.explorePage .profilePic {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.explorePage .cardTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #003366;
+  margin: 0;
+}
+
+.explorePage .actionIcons {
+  display: flex;
+  gap: 0.6rem;
+}
+
+
+.explorePage .actionIcons button {
+  background-color: #e0f2fe;
+  color: #0284c7;
+  border: none;
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.explorePage .actionIcons button:hover {
+  background-color: #bae6fd;
+}
+
+/* ============================
+   Description and Tags
+============================= */
+.explorePage .cardDescription {
+  color: #334155;
+  font-size: 1rem;
+  margin-top: 1rem;
+  line-height: 1.5;
+}
+
+.explorePage .seeMoreBtn {
+  background: none;
+  border: none;
+  color: #0056b3;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+.explorePage .tagList {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.explorePage .tagButton {
+  background-color: #dbeafe;
+  color: #1e3a8a;
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* ============================
+   Download Button
+============================= */
+.explorePage .downloadArea {
+  margin-top: 1rem;
+  text-align: right;
+}
+
+.explorePage .downloadBtn {
+  background-color: #e6fffa;
+  color: #0f766e;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.explorePage .downloadBtn:hover {
+  background-color: #ccfbf1;
+}
+/* ============================
+   Free/Paid Badge
+============================= */
+.explorePage .freeBadge {
+  background-color: #d1fae5;
+  color: #065f46;
+  padding: 0.3rem 0.7rem;
+  border-radius: 8px;
+  font-weight: 600;
+  margin-right: 0.8rem;
+  font-size: 0.85rem;
+}
+
+.explorePage .paidBadge {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  padding: 0.3rem 0.7rem;
+  border-radius: 8px;
+  font-weight: 600;
+  margin-right: 0.8rem;
+  font-size: 0.85rem;
+}
+
+/* ============================
+   Footer
+============================= */
+.explorePage .siteFooter {
+  background-color: #003366;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: auto;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.explorePage .footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.explorePage .footerLinks {
+  margin-bottom: 0.5rem;
+}
+
+.explorePage .footerLinks a {
+  color: white;
+  margin: 0 1rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.explorePage .footerLinks a:hover {
+  color: #ffdd57;
+}
+
+
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent dark overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* high z-index to overlay everything */
+}
+
+.modalBox {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  animation: scaleFade 0.3s ease-in-out;
+}
+
+.modalBox h3 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  color: #222;
+}
+
+.modalBox p {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: #444;
+}
+
+.modalBox button {
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.modalBox button:first-of-type {
+  background-color: #007bff;
+  color: white;
+}
+
+.modalBox button:first-of-type:hover {
+  background-color: #0056b3;
+}
+
+.modalBox button:last-of-type {
+  background-color: #e0e0e0;
+}
+
+.modalBox button:last-of-type:hover {
+  background-color: #c0c0c0;
+}
+.explorePage .uploadedBy {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 4px;
+}
+.explorePage .logoutButton {
+  background-color: #4338ca;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 10px;
+}
+
+.explorePage .logoutButton:hover {
+  background-color: #3730a3;
+}
+@keyframes scaleFade {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
