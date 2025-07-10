@@ -3,14 +3,7 @@ import axios from "axios";
 import { useNavigate, NavLink } from "react-router-dom";
 import styles from "../styles/Landing.module.css";
 import logo from "../assets/logo.svg";
-import {
-  FaUpload,
-  FaSearch,
-  FaHome,
-  FaBookOpen,
-  FaInfoCircle,
-  FaWallet,FaSignOutAlt,
-} from "react-icons/fa";
+import {FaUpload,FaSearch,FaHome,FaBookOpen,FaInfoCircle,FaWallet,FaSignOutAlt,} from "react-icons/fa";
 
 const API_BASE = "http://localhost:5000";
 
@@ -18,7 +11,7 @@ const LandingPage = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-
+    
   const dummyActivity = [
     { time: "2h ago", action: "Upvoted", link: "Remote Work Burnout" },
     { time: "1d ago", action: "Bought", link: "AI in Education" },
@@ -32,6 +25,7 @@ const LandingPage = () => {
   ];
 
   useEffect(() => {
+    
     if (token) {
       axios
         .get(`${API_BASE}/api/user/profile`, {
@@ -110,7 +104,7 @@ const handleLogout = () => {
 
       {/* Contributions Section */}
       <section className={styles.contributions}>
-        <h2>My Stats</h2>
+        <h2>My Contributions</h2>
         <div className={styles.contributionsGrid}>
           {(user?.contributions || dummyContributions).map((contrib, index) => (
             <div key={index} className={styles.contributionCard}>

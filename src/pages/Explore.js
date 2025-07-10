@@ -1,7 +1,7 @@
 // ExplorePage.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
+import { useNavigate,NavLink } from "react-router-dom";
 import styles from "../styles/Explore.module.css";
 import {
   FaHome, FaSearch, FaBookOpen, FaInfoCircle,
@@ -47,8 +47,11 @@ const ExplorePage = () => {
       createdAt: new Date(),
     },
   ];
-
+    const navigate = useNavigate();
   useEffect(() => {
+
+    const token = localStorage.getItem("token");
+    if (!token) return navigate("/");
     if (token) {
       axios.get(`${API_BASE}/api/user/profile`, {
         headers: { Authorization: `Bearer ${token}` },

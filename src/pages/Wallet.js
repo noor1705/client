@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 import styles from "../styles/Wallet.module.css";
-
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import {
   FaHome, FaSearch,  FaBookOpen, FaInfoCircle,
@@ -19,7 +19,7 @@ const Wallet = () => {
   const [withdrawAmount, setWithdrawAmount] = useState("");
   const [transactions, setTransactions] = useState([]);
 
-
+const navigate = useNavigate();
 
   const handleAddFunds = () => {
     axios
@@ -67,7 +67,6 @@ const handleLogout = () => {
             <ul>
               <li><NavLink to="/landing" className={({ isActive }) => isActive ? styles.activeNavLink : undefined}><FaHome /> Home</NavLink></li>
               <li><NavLink to="/explore" className={({ isActive }) => isActive ? styles.activeNavLink : undefined}><FaSearch /> Explore</NavLink></li>
-              {/* <li><NavLink to="/discussion" className={({ isActive }) => isActive ? styles.activeNavLink : undefined}><FaComments /> Discussions</NavLink></li> */}
               <li><NavLink to="/dashboard" className={({ isActive }) => isActive ? styles.activeNavLink : undefined}><FaBookOpen /> My Docs</NavLink></li>
               <li><NavLink to="/about" className={({ isActive }) => isActive ? styles.activeNavLink : undefined}><FaInfoCircle /> About Us</NavLink></li>
             </ul>

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";      
@@ -10,16 +9,16 @@ import {
 FaSignOutAlt
 } from "react-icons/fa";
 import axios from "axios";
-
 import styles from "../styles/About.module.css";
 
 import logo from "../assets/logo.svg";
 const API_BASE = "http://localhost:5000";
 
 const AboutUs = () => {
-  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+const token = localStorage.getItem("token");
+    if (!token) return navigate("/");
 
-const navigate = useNavigate();
 
   const handleLogout = () => {
   localStorage.removeItem("token");

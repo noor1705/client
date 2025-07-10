@@ -19,7 +19,7 @@ const DocsDashboard = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (!token) return navigate("/dashboard");
+    if (!token) return navigate("/");
 
     const fetchUserAndDocs = async () => {
       try {

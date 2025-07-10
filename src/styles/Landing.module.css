@@ -1,6 +1,4 @@
-/* ============================
-   Base wrapper for Landing Page
-============================= */
+
 .landingPage {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f5f8ff;
@@ -9,9 +7,6 @@
   padding-top: 80px;
 }
 
-/* ============================
-   Header Styles
-============================= */
 .landingPage .siteHeader {
   background-color: #003366;
   color: white;
@@ -92,28 +87,7 @@
   background-color: #ffe680;
 }
 
-/* Profile Photo */
-.landingPage .profileMenu {
-  position: relative;
-}
 
-.landingPage .profilePhoto {
-  background-color: #ffffff;
-  color: #003366;
-  font-weight: bold;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.landingPage .profilePhoto:hover {
-  background-color: #e9ecef;
-}
 
 .landingPage .activeNavLink {
   color: #4f46e5;
@@ -126,9 +100,6 @@
   color: #4338ca;
 }
 
-/* ============================
-   Dashboard Content Layout
-============================= */
 .landingPage .dashboardContent {
   max-width: 1200px;
   margin: 2rem auto;
